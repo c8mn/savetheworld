@@ -1,22 +1,93 @@
-<!-- このページがどのバージョンのHTMLなのか示す。バージョン指定がなければ主流のHTML5のことを指す -->
 <!DOCTYPE html>
-
-<!-- 文字コードの指定 -->
 <html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ヒーロー一覧 - 世界を救え</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+    }
 
-  <!-- ページの情報を記述する。ブラウザには表示されない。 -->
-  <head>
-    <!-- 文字コードの指定 -->
-　  <meta charset="utf-8">
+    h1 { color: #ffd700; }
 
-    <!-- ページタイトルを指定する。ブラウザーのタブやブックマーク字のタイトルになる。 -->
-    <title>HTMLの基本まとめ</title>
+    .class-button {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #444;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-    <!-- ページについての説明文を記述する。検索エンジンでタイトルと一緒に表示される。 -->
-    <meta name="description" content="HTMLの基本をまとめてみた">
-  </head>
+    .class-button:hover {
+      background-color: #666;
+    }
 
-  <!-- ブラウザに表示するコンテンツ -->
-  <body>
-  </body>
+    .hero-list {
+      display: none;
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mythic { color: gold; }
+    .legendary { color: orange; }
+  </style>
+</head>
+<body>
+
+  <h1>世界を救え - ヒーロー一覧</h1>
+
+  <div id="classes">
+    <div class="class-button" onclick="showHeroes('soldier')">ソルジャー</div>
+    <div class="class-button" onclick="showHeroes('constructor')">コンストラクター</div>
+    <div class="class-button" onclick="showHeroes('outlander')">アウトランダー</div>
+    <div class="class-button" onclick="showHeroes('ninja')">ニンジャ</div>
+  </div>
+
+  <div id="heroList" class="hero-list"></div>
+
+  <script>
+    const heroes = {
+      soldier: {
+        mythic: ["ジョンジー・ザ・ファースト", "ラミレス・ザ・ミリタリー"],
+        legendary: ["ウィングマン・ラミレス", "アーバンアサルト・ヘッドハンター", "サージェント・ジョンジー"]
+      },
+      constructor: {
+        mythic: ["メガベース・カイル", "パワーベース・ノックス"],
+        legendary: ["ベース・ケニー", "サンダーストライク・キャット", "マスター・デマイアン"]
+      },
+      outlander: {
+        mythic: ["アントニア・ザ・ワンダラー", "アーキオロ・ジェス"],
+        legendary: ["パスファインダー・ジェス", "トレイルブレイザー・AC", "レイヴン"]
+      },
+      ninja: {
+        mythic: ["ブレイクナックル・ケン", "ドラゴンスコーチ"],
+        legendary: ["ストームマスター・ケン", "シャドーストーカー・マヤ", "ソードマスター・ケン"]
+      }
+    };
+
+    function showHeroes(className) {
+      const data = heroes[className];
+      if (!data) return;
+
+      const heroListDiv = document.getElementById("heroList");
+      heroListDiv.style.display = "block";
+      heroListDiv.innerHTML = `
+        <h2>${className.toUpperCase()}</h2>
+        <h3>ミシックヒーロー</h3>
+        <ul>${data.mythic.map(name => `<li class="mythic">${name}</li>`).join("")}</ul>
+        <h3>レジェンドヒーロー</h3>
+        <ul>${data.legendary.map(name => `<li class="legendary">${name}</li>`).join("")}</ul>
+      `;
+    }
+  </script>
+</body>
 </html>
